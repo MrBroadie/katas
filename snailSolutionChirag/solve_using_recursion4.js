@@ -95,8 +95,7 @@ class LoopLimits {
       limitForB(b)
     ) {
       // check it is not the last cell on that edge
-      if (matchForB(b)) {
-        // if the first cell on the edge,
+      if (matchForB(b)) { // if the first cell on the edge,
         changeToLimitOnA(a); //  change the opposite limit, have to do this here, other conditions are not unique
       }
       b.val += changeToApplyToB; // change current cell

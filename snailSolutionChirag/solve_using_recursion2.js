@@ -32,6 +32,14 @@ class BaseTraversal {
     this.nextTraversal.init();
     return this.nextTraversal;
   }
+  getNextPosition() {
+    if (this.compareAgainstLimit()) {
+      this.changeIndex();
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 class LeftToRightTraversal extends BaseTraversal {
   constructor(limits) {
@@ -40,15 +48,8 @@ class LeftToRightTraversal extends BaseTraversal {
   init() {
     this.index = this.limits.minX;
   }
-  getNextPosition() {
-    if (this.index < this.limits.maxX) {
-      this.index++;
-      return true;
-    } else {
-      return false;
-    }
-  }
-
+  compareAgainstLimit = () => this.index < this.limits.maxX;
+  changeIndex = () => this.index++;
   Y() {
     return this.limits.minY;
   }
@@ -63,14 +64,8 @@ class RightToLeftTraversal extends BaseTraversal {
   init() {
     this.index = this.limits.maxX;
   }
-  getNextPosition() {
-    if (this.index > this.limits.minX) {
-      this.index--;
-      return true;
-    } else {
-      return false;
-    }
-  }
+  compareAgainstLimit = () => this.index > this.limits.minX;
+  changeIndex = () => this.index--;
 
   Y() {
     return this.limits.maxY;
@@ -86,14 +81,9 @@ class TopToBottomTraversal extends BaseTraversal {
   init() {
     this.index = this.limits.minY;
   }
-  getNextPosition() {
-    if (this.index < this.limits.maxY) {
-      this.index++;
-      return true;
-    } else {
-      return false;
-    }
-  }
+
+  compareAgainstLimit = () => this.index < this.limits.maxY;
+  changeIndex = () => this.index++;
 
   X() {
     return this.limits.maxX;
@@ -109,14 +99,9 @@ class BottomToTopTraversal extends BaseTraversal {
   init() {
     this.index = this.limits.maxY;
   }
-  getNextPosition() {
-    if (this.index > this.limits.minY) {
-      this.index--;
-      return true;
-    } else {
-      return false;
-    }
-  }
+
+  compareAgainstLimit = () => this.index > this.limits.minY;
+  changeIndex = () => this.index--;
 
   X() {
     return this.limits.minX;
